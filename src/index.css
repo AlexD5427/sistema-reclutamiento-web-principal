@@ -1,0 +1,240 @@
+@import url('https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,100..900;1,100..900&family=JetBrains+Mono:wght@400;500;700&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Exo 2", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+
+  --color-brand-primary: #004a8f;
+  --color-brand-medium: #005baa;
+  --color-brand-light: #00b0d8;
+  --color-brand-success: #00AB4E;
+  --color-brand-slate: #647786;
+  --color-brand-border: #AAB9C2;
+}
+
+/* Custom glass styling scrollbars & sliders */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(15, 23, 42, 0.05); /* Soft light track */
+}
+
+.dark ::-webkit-scrollbar-track {
+  background: rgba(15, 23, 42, 0.3);
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(100, 119, 134, 0.3);
+  border-radius: 99px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.dark ::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(100, 119, 134, 0.5);
+}
+
+.dark ::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+/* Accent custom hover glow and text transitions */
+.transition-all-300 {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@keyframes gradientBg {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+@utility animate-gradient-slow {
+  animation: gradientBg 4s ease infinite;
+}
+
+@keyframes marquee-scroll {
+  0%, 15% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(calc(-100% + 100%));
+  }
+  85%, 100% {
+    transform: translateX(0);
+  }
+}
+
+.animate-marquee-hover:hover {
+  display: inline-block;
+  min-width: 100%;
+  width: max-content;
+  animation: marquee-scroll 8s ease-in-out infinite;
+}
+
+@utility text-fluid-xs {
+  font-size: clamp(0.6rem, 0.55vw + 0.5rem, 0.75rem);
+}
+@utility text-fluid-sm {
+  font-size: clamp(0.75rem, 0.6vw + 0.6rem, 0.875rem);
+}
+@utility text-fluid-base {
+  font-size: clamp(0.875rem, 0.7vw + 0.7rem, 1rem);
+}
+@utility text-fluid-lg {
+  font-size: clamp(1rem, 0.8vw + 0.8rem, 1.125rem);
+}
+@utility text-fluid-xl {
+  font-size: clamp(1.125rem, 1vw + 0.9rem, 1.25rem);
+}
+@utility text-fluid-2xl {
+  font-size: clamp(1.25rem, 1.2vw + 1rem, 1.5rem);
+}
+@utility text-fluid-3xl {
+  font-size: clamp(1.5rem, 1.5vw + 1.2rem, 1.875rem);
+}
+@utility text-fluid-micro {
+  font-size: clamp(0.55rem, 0.4vw + 0.45rem, 0.65rem);
+}
+
+/* Range input modern overrides */
+input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: #00b0d8;
+  cursor: ew-resize;
+  border: 1.5px solid white;
+  box-shadow: 0 2px 5px rgba(0, 176, 216, 0.4);
+  transition: transform 0.1s ease, background-color 0.1s ease;
+}
+input[type="range"]::-webkit-slider-thumb:hover {
+  transform: scale(1.2);
+  background: #00c3f0;
+}
+input[type="range"]::-moz-range-thumb {
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: #00b0d8;
+  cursor: ew-resize;
+  border: 1.5px solid white;
+  box-shadow: 0 2px 5px rgba(0, 176, 216, 0.4);
+  transition: transform 0.1s ease, background-color 0.1s ease;
+}
+input[type="range"]::-moz-range-thumb:hover {
+  transform: scale(1.2);
+  background: #00c3f0;
+}
+
+/* Print styles for beautiful PDF/Print export without graphic errors or page cuts */
+@media print {
+  @page {
+    size: A4 landscape;
+    margin: 10mm;
+  }
+  
+  body, html {
+    background: #ffffff !important;
+    color: #000000 !important;
+    font-size: 11pt !important;
+    width: 100% !important;
+    height: auto !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+  
+  /* Hide everything except the print-only container */
+  #root > :not(.print-only), div:not(.print-only) {
+    display: none !important;
+  }
+  
+  body #root .print-only, .print-only {
+    display: block !important;
+    width: 100% !important;
+    height: auto !important;
+    position: relative !important;
+    left: 0 !important;
+    top: 0 !important;
+    visibility: visible !important;
+  }
+  
+  .page-break {
+    page-break-after: always !important;
+    break-after: page !important;
+  }
+  
+  .print-card, tr, .print-avoid-break {
+    page-break-inside: avoid !important;
+    break-inside: avoid !important;
+  }
+}
+
+.print-only {
+  display: none;
+}
+
+@keyframes border-glow-spin {
+  100% {
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
+}
+
+.active-nav-glow {
+  position: relative;
+  overflow: hidden;
+  z-index: 10;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: transform;
+}
+
+.active-nav-glow::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 250px;
+  height: 250px;
+  background: conic-gradient(
+    from 0deg,
+    transparent 30%,
+    #00b0d8 50%,
+    #00AB4E 70%,
+    transparent 100%
+  );
+  animation: border-glow-spin 3s linear infinite;
+  transform: translate(-50%, -50%);
+  z-index: -2;
+  will-change: transform;
+}
+
+.active-nav-glow::after {
+  content: '';
+  position: absolute;
+  inset: 1.5px;
+  background: white;
+  border-radius: inherit;
+  z-index: -1;
+}
+
+.dark .active-nav-glow::after {
+  background: #1e293b; /* slate-800 */
+}
+
+
+
+
+
+

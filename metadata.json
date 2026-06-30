@@ -1,0 +1,6 @@
+{
+  "name": "Applicant Assessment Dashboard",
+  "description": "A high-fidelity Liquid Glass styled dashboard for evaluating candidate profiles, visualizing qualification metrics, and checking recruitment agency indicators.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
